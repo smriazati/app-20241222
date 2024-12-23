@@ -1,0 +1,29 @@
+{
+  "name": "my-nextjs-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@sanity/client": "^2.23.2",
+    "@sanity/image-url": "^1.1.0",
+    "next": "latest",
+    "next-sanity": "^9.8.30",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwindcss": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "@types/react": "19.0.2",
+    "autoprefixer": "^10.0.0",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "postcss": "^8.0.0",
+    "typescript": "latest"
+  }
+}
