@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client"
 import { PROJECT_LIST_QUERY } from "@/sanity/lib/queries"
+import Link from "next/link";
 
 interface Project {
   _id: string;
@@ -19,21 +20,27 @@ export async function getServerSideProps() {
 }
 
 export default function Index({ projects }: { projects: Project[] }) {
-  console.log('projects', projects)
   return (
-    <>
-      <h1>hello world</h1>
+    <div className="bg-cream flex flex-col gap-4 p-4 container">
+      <h1 className="text-4xl font-manrope">sarah riazati project</h1>
       {
         projects && (
-          <ul>
+          <ul className="flex flex-col gap-2">
             {projects.map((project) => (
               <li key={project._id}>
-                <a href={`/projects/${project?.slug.current}`}>{project?.name}</a>
+                <Link
+                  href={`/projects/${project?.slug.current}`}
+                  className="flex font-manrope text-[18px] text-black hover:text-purple hover:animate-move-right transition duration-500 ease-in-out translate-x-0 hover:translate-x-2"
+                >
+                  {project?.name}
+                </Link>
               </li>
+
+
             ))}
           </ul>
         )
       }
-    </>
+    </div>
   )
 }

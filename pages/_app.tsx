@@ -1,7 +1,16 @@
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
+import { Manrope } from 'next/font/google';
 import { useEffect, useState } from 'react';
+import '../styles/tailwind.css';
 import '../styles/globals.css';
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  variable: '--font-Manrope',
+  weight: ['400', '700'],
+});
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -23,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router]);
 
   return (
-    <div className={`transition-container ${isTransitioning ? 'transitioning' : ''}`}>
+    <div className={`${manrope.variable} transition-container ${isTransitioning ? 'transitioning' : ''}`}>
       <Component {...pageProps} />
     </div>
   );
