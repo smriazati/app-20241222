@@ -1,6 +1,5 @@
-import { fetchSanityProjects } from '@/sanity/utils';
 import { Project } from '@/types/types';
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
 
 const ProjectContext = createContext<Project[]>([]);
 
@@ -8,20 +7,10 @@ import { ReactNode } from 'react';
 
 interface ProjectProviderProps {
     children: ReactNode;
+    projects: Project[];
 }
 
-export const ProjectProvider = ({ children }: ProjectProviderProps) => {
-    const [projects, setProjects] = useState<Project[]>([]);
-
-    useEffect(() => {
-        const getProjects = async () => {
-            const data = await fetchSanityProjects();
-            setProjects(data);
-        };
-
-        getProjects();
-    }, []);
-
+export const ProjectProvider = ({ children, projects }: ProjectProviderProps) => {
     return (
         <ProjectContext.Provider value={projects}>
             {children}

@@ -7,6 +7,7 @@ import "../styles/tailwind.css";
 import "../styles/globals.css";
 import { SiteHeader } from "@/components/Site/Header";
 import { ProjectProvider } from "@/contexts/projectContext";
+import { fetchSanityProjects } from "@/sanity/utils";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -15,7 +16,12 @@ const manrope = Manrope({
   preload: true,
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+MyApp.getInitialProps = async () => {
+  const projects = await fetchSanityProjects();
+  return { pageProps: { projects } };
+};
+
+function MyApp({ Component, pageProps }: AppProps & { pageProps: { projects: Project[] } }) {
   const router = useRouter();
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -39,9 +45,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       className={`${manrope.variable} transition-container ${isTransitioning ? "transitioning" : ""
         }`}
     >
-
       <SiteHeader />
-      <ProjectProvider>
+      <ProjectProvider projects={pageProps.projects}>
         <Component {...pageProps} />
       </ProjectProvider>
     </div>

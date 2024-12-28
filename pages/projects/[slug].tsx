@@ -1,31 +1,37 @@
 // pages/project/[slug].tsx
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, Metadata, ResolvingMetadata } from "next";
-import { client } from "@/sanity/lib/client";
+import { useContext } from "react"; // Import useContext to access your context
 import { Project } from "@/types/types";
 import Page404 from "../404";
-import { fetchSanityProjects } from "@/sanity/utils";
 import Head from "next/head";
 import { urlFor } from "@/sanity/lib/images";
+import { useProjects } from "@/contexts/projectContext"; // Assuming useProjects is your context hook
 
 interface ProjectPageProps {
-  project: Project;
-  metadata: {
-    title: string;
-    description: string;
-  };
-};
+  slug: string; // Pass the slug here to get the correct project
+}
 
-const ProjectPage = ({ project }: ProjectPageProps) => {
+const ProjectPage = ({ slug }: ProjectPageProps) => {
+  // Access your project context
+  const allProjects = useProjects();
+
+  // Find the project in context based on the slug
+  const project = allProjects.find((p: Project) => p.slug.current === slug);
+
+  // If no project is found, return the 404 page
   if (!project) {
     return <Page404 />;
   }
 
   return (
     <>
+      {/* Dynamic Title in the Head */}
       <Head>
         <title>{project.name} | Sarah Riazati Portfolio</title>
-        <meta name="description" content={project.tagline || ''} />
-        <meta name="og:image" content={urlFor(project.tnails[0]).width(600).height(400).quality(75).url()} />
+        <meta name="description" content={project.tagline || ""} />
+        <meta
+          name="og:image"
+          content={urlFor(project.tnails[0]).width(600).height(400).quality(75).url()}
+        />
       </Head>
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">{project.name}</h1>
@@ -33,45 +39,32 @@ const ProjectPage = ({ project }: ProjectPageProps) => {
         {/* Add more project details here */}
       </div>
     </>
-
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const query = '*[_type == "project"]{ slug }';
-  const projects = await client.fetch(query);
+// Next.js will automatically pass `params` into `getStaticProps` or `getServerSideProps`
+export const getStaticProps = async ({ params }: any) => {
+  // The slug is extracted from params (it comes from the URL, like "/project/some-slug")
+  const slug = params?.slug;
 
-  const paths = projects.map((project: Project) => ({
-    params: { slug: project.slug.current },
-  }));
-
-  return { paths, fallback: false };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params, previewData }) => {
-  const slug = params!.slug;
-
-  const allProjects =
-    (previewData as { projects: Project[] })?.projects || await fetchSanityProjects();
-
-  const project = allProjects.find((p: Project) => p.slug.current === slug);
-
-  if (!project) {
-    return {
-      notFound: true,  // Return 404 page if project is not found
-    };
-  }
-
+  // Return the slug as part of the props so it can be used in the component
   return {
     props: {
-      project,
-      projects: allProjects, // Pass the projects data to the page
+      slug,  // Pass the slug to the component
     },
     revalidate: 60, // Optional: Revalidate every 60 seconds
   };
 };
 
+export const getStaticPaths = async () => {
+  // Assume you already have access to all projects in your context
+  const allProjects = useProjects();  // This might not work directly here in `getStaticPaths`
 
+  const paths = allProjects.map((project: Project) => ({
+    params: { slug: project.slug.current },
+  }));
 
+  return { paths, fallback: false };
+};
 
 export default ProjectPage;
