@@ -7,8 +7,7 @@ interface IndexProps {
 
 export default function Index({ projects }: IndexProps) {
   return (
-    <div className="bg-cream flex flex-col gap-4 p-4 container">
-      <h1 className="uppercase">sarah riazati project</h1>
+    <div className="flex flex-col gap-4 p-4 container">
       <ProjectList projects={projects} />
     </div>
   );

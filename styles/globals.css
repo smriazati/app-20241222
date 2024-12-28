@@ -1,15 +1,19 @@
 /* Design Tokens */
 :root {
-  --color-primary: #000000;
-  --color-secondary: #800080;
+  --color-dark: #333;
+  --color-light: #f4f4f4;
   --color-cream: #f5f5dc;
-  --font-primary: 'Manrope', sans-serif;
-  --link-color: var(--color-primary);
-  --link-hover-color: var(--color-secondary);
-  --button-bg-color: var(--color-primary);
-  --button-text-color: #ffffff;
-  --button-bg-hover-color: var(--color-secondary);
-  --button-text-hover-color: #ffffff;
+  --color-purple: #800080;
+  --font-manrope: 'Manrope', sans-serif;
+
+  --font-primary: var(--font-manrope);
+  --link-color: var(--color-dark);
+  --link-hover-color: var(--color-purple);
+  --button-bg-color: var(--color-dark);
+  --button-text-color: var(--color-light);
+  --button-bg-hover-color: var(--color-purple);
+  --button-text-hover-color: var(--color-light);
+  --body-bg: var(--color-cream);
 }
 
 html,
@@ -18,7 +22,7 @@ body {
   padding: 0;
   font-size: 16px;
   line-height: 1.5;
-  background-color: var(--color-cream);
+  background-color: var(--body-bg);
   font-family: var(--font-primary);
 }
 
@@ -84,7 +88,7 @@ p {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   line-height: 1.2;
 }
 
@@ -104,7 +108,7 @@ h3 {
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   h2 {

@@ -1,47 +1,25 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
-import Link from 'next/link';
-import { PROJECT_BY_SLUG_QUERY } from '@/sanity/lib/queries';
-import { client } from '@/sanity/lib/client';
-
-interface Project {
-  _id: string;
-  name: string;
-  slug: string;
-}
+// pages/project/[slug].tsx
+import { GetStaticPaths, GetStaticProps } from "next";
+import { client } from "@/sanity/lib/client";
+import { Project } from "@/types/types";
+import Page404 from "../404";
+import { fetchSanityProjects } from "@/sanity/utils";
 
 interface ProjectPageProps {
   project: Project;
+  projects: Project[];
 }
 
 const ProjectPage = ({ project }: ProjectPageProps) => {
   if (!project) {
-    return (
-      <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-4">Page Not Found</h1>
-        <Link href="/">
-          <div className="text-blue-500 underline mb-4 inline-block">Back to Home</div>
-        </Link>
-      </div>
-    );
+    return <Page404 />;
   }
 
   return (
     <div className="container mx-auto p-4">
-      <Link href="/">
-        <div className="text-blue-500 underline mb-4 inline-block">Back to Home</div>
-      </Link>
       <h1 className="text-2xl font-bold mb-4">{project.name}</h1>
-      <p className="mb-4">This is a short description of the project.</p>
-      <img src="/path/to/image.jpg" alt="Project Image" className="mb-4" />
-
-      <div className="grid grid-cols-3 gap-4">
-        <img src="https://picsum.photos/id/237/200/300" alt="Grid Image 1" />
-        <img src="https://picsum.photos/id/237/200/300" alt="Grid Image 2" />
-        <img src="https://picsum.photos/id/237/200/300" alt="Grid Image 3" />
-        <img src="https://picsum.photos/id/237/200/300" alt="Grid Image 4" />
-        <img src="https://picsum.photos/id/237/200/300" alt="Grid Image 5" />
-        <img src="https://picsum.photos/id/237/200/300" alt="Grid Image 6" />
-      </div>
+      <p className="mb-4">{project.tagline}</p>
+      {/* Add more project details here */}
     </div>
   );
 };
@@ -51,23 +29,35 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const projects = await client.fetch(query);
 
   const paths = projects.map((project: Project) => ({
-    params: { slug: project.slug },
+    params: { slug: project.slug.current },
   }));
 
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { slug } = context.params!;
-  const project = await client.fetch(PROJECT_BY_SLUG_QUERY, { slug });
+export const getStaticProps: GetStaticProps = async ({ params, previewData }) => {
+  const slug = params!.slug;
+
+  const allProjects =
+    (previewData as { projects: Project[] })?.projects || await fetchSanityProjects();
+
+  const project = allProjects.find((p: Project) => p.slug.current === slug);
 
   if (!project) {
     return {
-      notFound: true,
+      notFound: true,  // Return 404 page if project is not found
     };
   }
 
-  return { props: { project } };
+  return {
+    props: {
+      project,
+      projects: allProjects, // Pass the projects data to the page
+    },
+    revalidate: 60, // Optional: Revalidate every 60 seconds
+  };
 };
+
+
 
 export default ProjectPage;

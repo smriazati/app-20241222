@@ -1,7 +1,6 @@
-import Link from 'next/link';
-import React from 'react';
+import Link from "next/link"
 
-const Custom404 = () => {
+export const NotFound = () => {
     return (
         <div className="min-h-screen flex flex-col justify-center items-center">
             <div className="flex flex-col gap-2">
@@ -12,7 +11,5 @@ const Custom404 = () => {
 
             </div>
         </div>
-    );
-};
-
-export default Custom404;
+    )
+}
