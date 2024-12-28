@@ -1,14 +1,15 @@
+import { Container } from "@/components/Layout/Container";
 import { ProjectList } from "@/components/ProjectList";
-import { Project } from "@/types/types";
+import { ProjectNav } from "@/components/ProjectNav";
+import { useProjects } from "@/contexts/projectContext";
 
-interface IndexProps {
-  projects: Project[];
-}
-
-export default function Index({ projects }: IndexProps) {
+export default function Index() {
+  const projects = useProjects();
   return (
-    <div className="flex flex-col gap-4 p-4 container">
+    <Container>
+      <ProjectNav active="all" />
       <ProjectList projects={projects} />
-    </div>
+    </Container>
   );
 }
+
