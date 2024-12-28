@@ -22,7 +22,7 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
                                     <Image
                                         src={urlFor(project.tnails[0]).width(100).height(100).url()}
                                         alt={project?.name}
-
+                                        priority
                                         fill
                                         sizes="100px"
                                         className="rounded-lg object-cov er"
