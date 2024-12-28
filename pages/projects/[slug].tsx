@@ -6,7 +6,7 @@ import { client } from '@/sanity/lib/client';
 interface Project {
   _id: string;
   name: string;
-  slug: { current: string };
+  slug: string;
 }
 
 interface ProjectPageProps {
@@ -51,7 +51,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const projects = await client.fetch(query);
 
   const paths = projects.map((project: Project) => ({
-    params: { slug: project.slug.current },
+    params: { slug: project.slug },
   }));
 
   return { paths, fallback: false };

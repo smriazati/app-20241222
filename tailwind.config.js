@@ -7,11 +7,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        manrope: ['Manrope', 'sans-serif'],
+        manrope: ['var(--font-primary)', 'sans-serif'],
       },
       colors: {
-        cream: '#f1e1c6',
-        purple: "#2f08ee"
+        cream: 'var(--color-cream)',
+        purple: 'var(--color-secondary)',
+        'link-hover': 'var(--link-hover-color)',
+        'button-hover': 'var(--button-hover-color)',
       }
     },
   },
