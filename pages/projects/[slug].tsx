@@ -1,14 +1,19 @@
 // pages/project/[slug].tsx
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, Metadata, ResolvingMetadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { Project } from "@/types/types";
 import Page404 from "../404";
 import { fetchSanityProjects } from "@/sanity/utils";
+import Head from "next/head";
+import { urlFor } from "@/sanity/lib/images";
 
 interface ProjectPageProps {
   project: Project;
-  projects: Project[];
-}
+  metadata: {
+    title: string;
+    description: string;
+  };
+};
 
 const ProjectPage = ({ project }: ProjectPageProps) => {
   if (!project) {
@@ -16,11 +21,19 @@ const ProjectPage = ({ project }: ProjectPageProps) => {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">{project.name}</h1>
-      <p className="mb-4">{project.tagline}</p>
-      {/* Add more project details here */}
-    </div>
+    <>
+      <Head>
+        <title>{project.name} | Sarah Riazati Portfolio</title>
+        <meta name="description" content={project.tagline || ''} />
+        <meta name="og:image" content={urlFor(project.tnails[0]).width(600).height(400).quality(75).url()} />
+      </Head>
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-4">{project.name}</h1>
+        <p className="mb-4">{project.tagline}</p>
+        {/* Add more project details here */}
+      </div>
+    </>
+
   );
 };
 
@@ -57,6 +70,7 @@ export const getStaticProps: GetStaticProps = async ({ params, previewData }) =>
     revalidate: 60, // Optional: Revalidate every 60 seconds
   };
 };
+
 
 
 

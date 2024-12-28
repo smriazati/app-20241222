@@ -7,7 +7,6 @@ import "../styles/tailwind.css";
 import "../styles/globals.css";
 import { SiteHeader } from "@/components/Site/Header";
 import { ProjectProvider } from "@/contexts/projectContext";
-import Head from "next/head";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -40,10 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       className={`${manrope.variable} transition-container ${isTransitioning ? "transitioning" : ""
         }`}
     >
-      <Head>
-        <title>Sarah Riazati portfolio</title>
-        <meta name="description" content="Bridging the gap between creativity and technology with expertise in web development, UX design, video production, and animation" />
-      </Head>
+
       <SiteHeader />
       <ProjectProvider>
         <Component {...pageProps} />
@@ -51,6 +47,5 @@ function MyApp({ Component, pageProps }: AppProps) {
     </div>
   );
 }
-
 
 export default MyApp;

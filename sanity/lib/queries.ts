@@ -1,6 +1,6 @@
 import { defineQuery } from 'next-sanity'
 
-export const PROJECTS_QUERY = `*[_type == "project"]{
+export const PROJECTS_QUERY = `*[_type == "project" && (hideFromGrid != true || !defined(hideFromGrid)) && (disableProjectPage != true || !defined(disableProjectPage))]{
     _id,
     _type,
     name,

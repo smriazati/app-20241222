@@ -10,7 +10,7 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
     }
     return (
         <ul className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6">
-            {projects.map((project) => (
+            {projects.map((project, index) => (
                 <li key={project._id}>
                     <Link
                         href={project?.slug.current ? `/projects/${project?.slug.current}` : ''}
@@ -20,12 +20,12 @@ export const ProjectList = ({ projects }: { projects: Project[] }) => {
                             {project.tnails &&
                                 <div className="min-w-16 min-h-16 w-16 h-16 transition duration-300 ease-in bg-purple relative rounded-full overflow-hidden">
                                     <Image
-                                        src={urlFor(project.tnails[0]).width(100).height(100).url()}
+                                        src={urlFor(project.tnails[0]).width(100).height(100).quality(75).url()}
                                         alt={project?.name}
                                         priority
-                                        fill
-                                        sizes="100px"
-                                        className="rounded-lg object-cov er"
+                                        width="100"
+                                        height="100"
+                                        className="object-cover"
                                     />
                                 </div>
                             }
