@@ -20,7 +20,7 @@ export default async function ProjectPage({
       <h1 className="text-2xl font-bold mb-4">{project.name}</h1>
       <p className="mb-4">{project.tagline}</p>
       {/* Add more project details here */}
-      <PortableText value={project.description} />
+      {/* <PortableText value={project.description} /> */}
     </div>
   );
 }
