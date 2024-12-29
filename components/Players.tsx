@@ -1,34 +1,52 @@
 'use client'
-import dynamic from 'next/dynamic';
+import Script from 'next/script';
+import { useEffect, useState } from 'react';
 
-const YouTubePlayer = dynamic(() => import('react-player/youtube'), { ssr: false });
-const VimeoPlayer = dynamic(() => import('react-player/vimeo'), { ssr: false });
 
 
 export const Player = ({ videoId, type }: { videoId: string, type: string }) => {
+    const [isPlayerLoaded, setIsPlayerLoaded] = useState(false);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsPlayerLoaded(true);
+        }, 100); // delay load to avoid blocking the main thread
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (!isPlayerLoaded) {
+        return null;
+    }
 
     if (type === 'YouTube') {
-        return <YouTube url={`https://www.youtube.com/watch?v=${videoId}`} />;
+        return <YouTube videoId={videoId} />;
     }
-    if (type === 'Vimeo') {
-        return <Vimeo url={`https://vimeo.com/${videoId}`} />;
+    if (type === 'vimeo') {
+        return <Vimeo videoId={videoId} />;
     }
     return null;
 }
 
-const YouTube = ({ url }: { url: string }) => {
+const YouTube = ({ videoId }: { videoId: string }) => {
+    const url = `https://www.youtube.com/embed/${videoId}`
     return (
         <ResponsivePlayer>
-            <YouTubePlayer url={url} width='100%' height='100%' />
+            <iframe width="1280" height="720" src={url} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" allowFullScreen></iframe>
         </ResponsivePlayer>
     );
 }
 
-const Vimeo = ({ url }: { url: string }) => {
+const Vimeo = ({ videoId }: { videoId: string }) => {
+    const url = `https://player.vimeo.com/video/${videoId}`
     return (
         <ResponsivePlayer>
-            <VimeoPlayer url={url} width='100%' height='100%' />
-        </ResponsivePlayer>
+            <iframe className="w-full h-full" src={url} allow="autoplay; fullscreen; picture-in-picture; clipboard-write" ></iframe>
+
+            <Script
+                src="https://player.vimeo.com/api/player.js"
+                strategy="afterInteractive" // Load script after page is interactive
+            />
+        </ResponsivePlayer >
     );
 }
 
