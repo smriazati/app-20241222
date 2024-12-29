@@ -23,7 +23,7 @@ export const ProjectListItem = ({ project, priority }: { project: ProjectListIte
                     </div>
                 }
                 <div className="flex flex-col">
-                    <h2>{project.name}</h2>
+                    {project.name && (<h2>{project.name}</h2>)}
                     {/* {project?.tagline && <p>{project?.tagline}</p>} */}
                 </div>
             </div>

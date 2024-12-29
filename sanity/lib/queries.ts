@@ -23,7 +23,7 @@ const vidTnailProjection = `vidTnail{ ${imageAssetProjection} }`;
 
 const playersProjection = `players[]{ _key, type, name, videoId }`;
 
-const projectsListBaseProjection = ` 
+export const projectsListBaseProjection = ` 
     _id,
     name,
     slug,

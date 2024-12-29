@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GithubSvg, LinkedinSvg } from "./FooterIcons";
+import { GithubSvg, LinkedinSvg } from "../Icons";
 
 
 const LINKS = [

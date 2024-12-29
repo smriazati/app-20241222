@@ -2,9 +2,8 @@
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
 
-
-
 export const Player = ({ videoId, type }: { videoId: string, type: string }) => {
+    console.log('Player', videoId, type);
     const [isPlayerLoaded, setIsPlayerLoaded] = useState(false);
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -15,7 +14,14 @@ export const Player = ({ videoId, type }: { videoId: string, type: string }) => 
     }, []);
 
     if (!isPlayerLoaded) {
-        return null;
+        // create a cream rectangle with 16x9 aspect ratio 
+
+        const placeholder = (
+            <div className="bg-cream relative pt-[56.25%]">
+                <div className="absolute top-0 left-0 w-full h-full"></div>
+            </div>
+        );
+        return placeholder;
     }
 
     if (type === 'YouTube') {
@@ -31,7 +37,7 @@ const YouTube = ({ videoId }: { videoId: string }) => {
     const url = `https://www.youtube.com/embed/${videoId}`
     return (
         <ResponsivePlayer>
-            <iframe width="1280" height="720" src={url} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" allowFullScreen></iframe>
+            <iframe className="w-full h-full" src={url} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" allowFullScreen></iframe>
         </ResponsivePlayer>
     );
 }
@@ -56,9 +62,11 @@ interface ResponsivePlayerProps {
 
 const ResponsivePlayer = ({ children }: ResponsivePlayerProps) => {
     return (
-        <div className="bg-gray-200 relative pt-[56.25%]">
-            <div className="absolute top-0 left-0 w-full h-full">
-                {children}
+        <div className="overflow-hidden relative">
+            <div className="bg-cream relative pt-[56.25%]">
+                <div className="absolute top-0 left-0 w-full h-full">
+                    {children}
+                </div>
             </div>
         </div>
     )
