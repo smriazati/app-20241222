@@ -5,11 +5,11 @@ import { useProjects } from "@/contexts/projectContext";
 import Head from "next/head";
 
 const metadata = {
-    title: 'Animation Projects | Sarah Riazati Portfolio',
+    title: 'Video Projects | Sarah Riazati Portfolio',
     description: 'Bridging the gap between creativity and technology with expertise in web development, UX design, video production, and animation',
 };
 
-export default function Index() {
+export default function VideoIndex() {
     const allProjects = useProjects();
 
     const projects = allProjects.filter((project) => {
@@ -17,7 +17,7 @@ export default function Index() {
         if (!project.categories) {
             return false;
         }
-        return project.categories.some((category) => category.slug.current === "animation")
+        return project.categories.some((category) => category.slug.current === "video")
     });
 
     return (
@@ -27,7 +27,7 @@ export default function Index() {
                 <meta name="description" content={metadata.description} />
             </Head>
             <Container >
-                <ProjectNav active="animation" />
+                <ProjectNav active="video" />
                 <ProjectList projects={projects} />
             </Container>
         </>

@@ -9,7 +9,7 @@ const metadata = {
     description: 'Bridging the gap between creativity and technology with expertise in web development, UX design, video production, and animation',
 };
 
-export default function Index() {
+export default function WebIndex() {
     const allProjects = useProjects();
 
     const projects = allProjects.filter((project) => {

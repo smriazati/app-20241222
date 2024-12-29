@@ -1,8 +1,8 @@
+'use client'
 import { Container } from "@/components/Layout/Container";
 import { ProjectList } from "@/components/ProjectList";
 import { ProjectNav } from "@/components/ProjectNav";
 import { useProjects } from "@/contexts/projectContext";
-import Head from "next/head";
 
 const metadata = {
   title: 'Home | Sarah Riazati Portfolio',
@@ -11,16 +11,15 @@ const metadata = {
 
 
 export default function Index() {
-  const projects = useProjects();
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
-      </Head>
+      </Head> */}
       <Container>
         <ProjectNav active="all" />
-        <ProjectList projects={projects} />
+        {/* <ProjectList projects={projects} /> */}
       </Container>
     </>
   );
