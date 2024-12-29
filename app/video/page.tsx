@@ -1,7 +1,6 @@
 import { Container } from "@/components/Layout/Container";
 import { ProjectList } from "@/components/ProjectList";
 import { ProjectNav } from "@/components/ProjectNav";
-import { useProjects } from "@/contexts/projectContext";
 import { client } from "@/sanity/lib/client";
 import { PROJECTS_BY_CATEGORY_QUERY } from "@/sanity/lib/queries";
 import Head from "next/head";

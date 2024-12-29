@@ -80,7 +80,16 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`
         name,
         "slug": slug.current,
         "description": overview.rte,
-        types[]->
+        types[]->,
+        tnails[]{
+            asset->{
+                url
+            }
+        },
+        client[]->{
+            name,
+            slug
+        },
     }
 `);
 

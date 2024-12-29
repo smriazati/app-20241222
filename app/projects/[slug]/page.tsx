@@ -1,15 +1,14 @@
 import { client } from "@/sanity/lib/client";
 import { PROJECT_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { NotFound } from "@/components/NotFound";
+import { PortableText } from "next-sanity";
 
-interface ProjectPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { slug } = params;
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const slug = (await params).slug
   const project = await client.fetch(PROJECT_BY_SLUG_QUERY, { slug });
 
   if (!project) {
@@ -21,6 +20,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <h1 className="text-2xl font-bold mb-4">{project.name}</h1>
       <p className="mb-4">{project.tagline}</p>
       {/* Add more project details here */}
+      {/* <PortableText blocks={project.description} /> */}
     </div>
   );
 }
