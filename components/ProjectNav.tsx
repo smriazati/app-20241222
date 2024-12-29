@@ -12,7 +12,6 @@ export const ProjectNav = ({ active }: { active: string }) => {
         { slug: 'all', label: 'All' },
         { slug: 'web', label: 'Web' },
         { slug: 'video', label: 'Video' },
-        { slug: 'animation', label: 'Animation' },
     ];
 
     return (

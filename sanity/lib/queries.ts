@@ -31,14 +31,14 @@ export const projectsListBaseProjection = `
     ${tnailsProjection}
 `
 
-export const PROJECTS_QUERY = `*[_type == "project" && (hideFromGrid != true || !defined(hideFromGrid)) && (disableProjectPage != true || !defined(disableProjectPage))]|order(rankOrder asc){
+export const PROJECTS_QUERY = `*[_type == "project" && (hideFromGrid != true || !defined(hideFromGrid)) && (disableProjectPage != true || !defined(disableProjectPage))]|order(orderRank){
    ${projectsListBaseProjection}
-  }|order(orderRank)`;
+  }|order(rankOrder asc)`;
 
 
 
 export const PROJECTS_BY_CATEGORY_QUERY = defineQuery(`
-  *[_type == "project" && $category in categories[]->slug.current && (hideFromGrid != true || !defined(hideFromGrid)) && (disableProjectPage != true || !defined(disableProjectPage))]|order(rankOrder asc){ 
+  *[_type == "project" && $category in categories[]->slug.current && (hideFromGrid != true || !defined(hideFromGrid)) && (disableProjectPage != true || !defined(disableProjectPage))]|order(orderRank){ 
       ${projectsListBaseProjection}
   }
 `);

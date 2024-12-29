@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default async function Index() {
 
   const projects = await client.fetch(PROJECTS_QUERY);
-  console.log("client", projects[0].client)
+  console.log("project names", projects.map(p => p.name));
   return (
     <>
 
