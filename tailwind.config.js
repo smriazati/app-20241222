@@ -12,6 +12,8 @@ module.exports = {
       colors: {
         cream: 'var(--color-cream)',
         purple: 'var(--color-purple)',
+        dark: 'var(--color-dark)',
+        light: 'var(--color-light)',
         'link-hover': 'var(--link-hover-color)',
         'button-hover': 'var(--button-hover-color)',
       }

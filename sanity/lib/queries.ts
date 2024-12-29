@@ -61,3 +61,10 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`
         ${playersProjection}
     }
 `);
+
+
+export const RELATED_PROJECTS_QUERY = defineQuery(`
+*[_type == "project" && slug.current != $slug]|order(rankOrder asc) [0...10]{
+   ${projectsListBaseProjection}
+}
+`)

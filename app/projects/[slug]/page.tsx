@@ -1,13 +1,14 @@
 import { client } from "@/sanity/lib/client";
-import { PROJECT_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { PROJECT_BY_SLUG_QUERY, RELATED_PROJECTS_QUERY } from "@/sanity/lib/queries";
 import { NotFound } from "@/components/NotFound";
 import { PortableText } from "next-sanity";
-import { ProjectBySlug } from "@/types/types";
+import { ProjectBySlug, ProjectListItemType } from "@/types/types";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/images";
 import Link from "next/link";
 import { Player } from "@/components/Players";
 import { PortableTextComponents } from "@/components/PortableTextComponents";
+import { ProjectList } from "@/components/ProjectList";
 
 export default async function ProjectPage({
   params,
@@ -17,6 +18,7 @@ export default async function ProjectPage({
   const slug = (await params).slug
   const project: ProjectBySlug = await client.fetch(PROJECT_BY_SLUG_QUERY, { slug });
 
+  const relatedProjects: ProjectListItemType[] = await client.fetch(RELATED_PROJECTS_QUERY, { slug });
   if (!project) {
     return <NotFound />;
   }
@@ -24,8 +26,8 @@ export default async function ProjectPage({
     name, tagline, description, skills, links, gallery, tnails, players
   } = project
   return (
-    <div className="mt-16 py-8 px-4 bg-white min-h-screen">
-      <div className="grid grid-cols-[1fr_2fr]  auto-rows-[min-content] gap-x-12 gap-y-4">
+    <div className="mt-16 bg-white min-h-screen">
+      <div className="py-8 px-4 grid grid-cols-[1fr_2fr]  auto-rows-[min-content] gap-x-12 gap-y-4">
 
         <div className="col-start-1 col-end-3 row-start-1 row-end-2">
           <div className="flex flex-col gap-4">
@@ -130,6 +132,11 @@ export default async function ProjectPage({
         </div>
       </div>
 
+
+      <div className="mt-8 flex flex-col gap-4 py-12 px-4 bg-cream">
+        <h2 className="text-2xl font-bold">Related Projects</h2>
+        <ProjectList projects={relatedProjects} />
+      </div>
     </div >
   );
 }

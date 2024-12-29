@@ -72,7 +72,7 @@ export interface ProjectBySlug {
 
 
 
-export interface ProjectsList {
+export interface ProjectListItemType {
     _id: string;
     name: string;
     slug: Slug;
