@@ -3,7 +3,7 @@ import { ProjectListItemType } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 
-export const ProjectListItem = ({ project }: { project: ProjectListItemType }) => {
+export const ProjectListItem = ({ project, priority }: { project: ProjectListItemType, priority: boolean }) => {
     return (
         <Link
             href={project?.slug.current ? `/projects/${project?.slug.current}` : ''}
@@ -15,7 +15,7 @@ export const ProjectListItem = ({ project }: { project: ProjectListItemType }) =
                         <Image
                             src={urlFor(project.tnails[0]).width(100).height(100).quality(75).url()}
                             alt={project?.name}
-                            priority
+                            priority={priority}
                             width="100"
                             height="100"
                             className="object-cover"

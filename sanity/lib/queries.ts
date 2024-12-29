@@ -68,3 +68,14 @@ export const RELATED_PROJECTS_QUERY = defineQuery(`
    ${projectsListBaseProjection}
 }
 `)
+
+
+export const PROJECT_METADATA_BY_SLUG_QUERY = defineQuery(`
+    *[_type == "project" && slug.current == $slug][0]{ 
+        _id,
+        name,
+        "ogImg": tnails[0]{
+            asset-> {_id, url }
+        }
+    }
+`);

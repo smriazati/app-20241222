@@ -3,12 +3,13 @@ import { ProjectList } from "@/components/ProjectList";
 import { ProjectNav } from "@/components/ProjectNav";
 import { client } from "@/sanity/lib/client";
 import { PROJECTS_BY_CATEGORY_QUERY } from "@/sanity/lib/queries";
-import Head from "next/head";
+import { Metadata } from "next";
 
-const metadata = {
+export const metadata: Metadata = {
     title: 'Animation Projects | Sarah Riazati Portfolio',
     description: 'Bridging the gap between creativity and technology with expertise in web development, UX design, video production, and animation',
-};
+}
+
 
 
 export default async function AnimationIndex() {
@@ -17,10 +18,6 @@ export default async function AnimationIndex() {
 
     return (
         <>
-            <Head>
-                <title>{metadata.title}</title>
-                <meta name="description" content={metadata.description} />
-            </Head>
             <Container >
                 <ProjectNav active="animation" />
                 <ProjectList projects={projects} />

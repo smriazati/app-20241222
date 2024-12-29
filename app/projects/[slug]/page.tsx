@@ -1,8 +1,8 @@
 import { client } from "@/sanity/lib/client";
-import { PROJECT_BY_SLUG_QUERY, RELATED_PROJECTS_QUERY } from "@/sanity/lib/queries";
+import { PROJECT_BY_SLUG_QUERY, PROJECT_METADATA_BY_SLUG_QUERY, RELATED_PROJECTS_QUERY } from "@/sanity/lib/queries";
 import { NotFound } from "@/components/NotFound";
 import { PortableText } from "next-sanity";
-import { ProjectBySlug, ProjectListItemType } from "@/types/types";
+import { ProjectBySlug, ProjectListItemType, ProjectMetadataBySlug } from "@/types/types";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/images";
 import Link from "next/link";
@@ -10,11 +10,28 @@ import { Player } from "@/components/Players";
 import { PortableTextComponents } from "@/components/PortableTextComponents";
 import { ProjectList } from "@/components/ProjectList";
 
-export default async function ProjectPage({
-  params,
-}: {
+import type { Metadata } from 'next'
+
+type Props = {
   params: Promise<{ slug: string }>
-}) {
+}
+
+export async function generateMetadata(
+  { params }: Props): Promise<Metadata> {
+  const slug = (await params).slug
+
+  const project: ProjectMetadataBySlug = await client.fetch(PROJECT_METADATA_BY_SLUG_QUERY, { slug });
+
+  return {
+    title: `${project.name} | Sarah Riazati Portfolio`,
+    openGraph: {
+      images: [urlFor(project.ogImg).width(1200).height(630).fit('clip').quality(75).url()],
+    },
+  }
+}
+
+export default async function ProjectPage({ params }: Props) {
+
   const slug = (await params).slug
   const project: ProjectBySlug = await client.fetch(PROJECT_BY_SLUG_QUERY, { slug });
 
@@ -25,6 +42,8 @@ export default async function ProjectPage({
   const {
     name, tagline, description, skills, links, gallery, tnails, players
   } = project
+
+
   return (
     <div className="mt-16 bg-white min-h-screen">
       <div className="py-8 px-4 grid grid-cols-[1fr_2fr]  auto-rows-[min-content] gap-x-12 gap-y-4">
@@ -135,7 +154,7 @@ export default async function ProjectPage({
 
       <div className="mt-8 flex flex-col gap-4 py-12 px-4 bg-cream">
         <h2 className="text-2xl font-bold">Related Projects</h2>
-        <ProjectList projects={relatedProjects} />
+        <ProjectList projects={relatedProjects} priority={false} />
       </div>
     </div >
   );

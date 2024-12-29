@@ -3,12 +3,12 @@ import { ProjectList } from "@/components/ProjectList";
 import { ProjectNav } from "@/components/ProjectNav";
 import { client } from "@/sanity/lib/client";
 import { PROJECTS_QUERY } from "@/sanity/lib/queries";
+import { Metadata } from "next";
 
-const metadata = {
+export const metadata: Metadata = {
   title: 'Home | Sarah Riazati Portfolio',
   description: 'Bridging the gap between creativity and technology with expertise in web development, UX design, video production, and animation',
 }
-
 
 export default async function Index() {
 

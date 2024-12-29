@@ -79,3 +79,11 @@ export interface ProjectListItemType {
     tnails: Array<ImageAsset> | null;
     tagline: string | null;
 }
+
+
+export interface ProjectMetadataBySlug {
+    _id: string;
+    name: string;
+    ogImg: ImageAsset | null;
+
+}
