@@ -1,6 +1,6 @@
 import { defineQuery } from 'next-sanity'
 
-export const PROJECTS_QUERY = `*[_type == "project" && (hideFromGrid != true || !defined(hideFromGrid)) && (disableProjectPage != true || !defined(disableProjectPage))]{
+const projectsListBaseProjection = ` 
     _id,
     _type,
     name,
@@ -68,7 +68,10 @@ export const PROJECTS_QUERY = `*[_type == "project" && (hideFromGrid != true || 
     orderRank,
     _createdAt,
     _updatedAt,
-    _rev
+    _rev`
+
+export const PROJECTS_QUERY = `*[_type == "project" && (hideFromGrid != true || !defined(hideFromGrid)) && (disableProjectPage != true || !defined(disableProjectPage))]{
+   ${projectsListBaseProjection}
   }|order(orderRank)`;
 
 export const PROJECT_BY_SLUG_QUERY = defineQuery(`
@@ -79,4 +82,11 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`
         "description": overview.rte,
         types[]->
     }
+`);
+
+
+export const PROJECTS_BY_CATEGORY_QUERY = defineQuery(`
+  *[_type == "project" && $category in categories[]->slug.current && (hideFromGrid != true || !defined(hideFromGrid)) && (disableProjectPage != true || !defined(disableProjectPage))]{ 
+      ${projectsListBaseProjection}
+  }
 `);

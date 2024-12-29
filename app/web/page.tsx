@@ -1,31 +1,17 @@
 import { Container } from "@/components/Layout/Container";
 import { ProjectList } from "@/components/ProjectList";
 import { ProjectNav } from "@/components/ProjectNav";
-import { useProjects } from "@/contexts/projectContext";
-import Head from "next/head";
-
+import { client } from "@/sanity/lib/client";
+import { PROJECTS_BY_CATEGORY_QUERY } from "@/sanity/lib/queries";
 const metadata = {
     title: 'Web Projects | Sarah Riazati Portfolio',
     description: 'Bridging the gap between creativity and technology with expertise in web development, UX design, video production, and animation',
 };
 
-export default function WebIndex() {
-    const allProjects = useProjects();
-
-    const projects = allProjects.filter((project) => {
-        console.log(project)
-        if (!project.categories) {
-            return false;
-        }
-        return project.categories.some((category) => category.slug.current === "web")
-    });
-
+export default async function WebIndex() {
+    const projects = await client.fetch(PROJECTS_BY_CATEGORY_QUERY, { category: 'web' });
     return (
         <>
-            <Head>
-                <title>{metadata.title}</title>
-                <meta name="description" content={metadata.description} />
-            </Head>
             <Container >
                 <ProjectNav active="web" />
                 <ProjectList projects={projects} />

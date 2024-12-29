@@ -1,8 +1,8 @@
-'use client'
 import { Container } from "@/components/Layout/Container";
 import { ProjectList } from "@/components/ProjectList";
 import { ProjectNav } from "@/components/ProjectNav";
-import { useProjects } from "@/contexts/projectContext";
+import { client } from "@/sanity/lib/client";
+import { PROJECTS_QUERY } from "@/sanity/lib/queries";
 
 const metadata = {
   title: 'Home | Sarah Riazati Portfolio',
@@ -10,16 +10,15 @@ const metadata = {
 }
 
 
-export default function Index() {
+export default async function Index() {
+
+  const projects = await client.fetch(PROJECTS_QUERY);
   return (
     <>
-      {/* <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-      </Head> */}
+
       <Container>
         <ProjectNav active="all" />
-        {/* <ProjectList projects={projects} /> */}
+        <ProjectList projects={projects} />
       </Container>
     </>
   );
