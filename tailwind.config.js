@@ -11,7 +11,7 @@ module.exports = {
       },
       colors: {
         cream: 'var(--color-cream)',
-        purple: 'var(--color-secondary)',
+        purple: 'var(--color-purple)',
         'link-hover': 'var(--link-hover-color)',
         'button-hover': 'var(--button-hover-color)',
       }

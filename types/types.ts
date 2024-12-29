@@ -1,79 +1,81 @@
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-export interface Project {
+interface Slug {
+    _type: 'slug';
+    current: string;
+}
+
+interface ImageAsset {
+    asset: {
+        _id: string;
+        url: string
+    }
+}
+
+interface Link {
+    url: string;
+    text: string;
+}
+
+interface Skill {
     _id: string;
-    _type: 'project';
     name: string;
-    slug: {
-        _type: 'slug';
-        current: string;
-    };
-    hideFromGrid?: boolean;
-    disableProjectPage?: boolean;
-    client: Array<{
-        _type: 'client';
-        _id: string;
-        name: string;
-        slug: {
-            _type: 'slug';
-            current: string;
-        };
-    }>;
-    tnails: Array<SanityImageSource>;
-    vidTnail: {
-        _type: 'file';
-        asset: {
-            _ref: string;
-            _type: 'reference';
-        };
-    };
-    categories: Array<{
-        _type: 'category';
-        _id: string;
-        name: string;
-        slug: {
-            _type: 'slug';
-            current: string;
-        };
-    }>;
-    types: Array<{
-        _type: 'projectType';
-        _id: string;
-        name: string;
-        slug: {
-            _type: 'slug';
-            current: string;
-        };
-    }>;
-    skills: Array<{
-        _type: 'skill';
-        _id: string;
-        name: string;
-        slug: {
-            _type: 'slug';
-            current: string;
-        };
-        image: SanityImageSource;
-        orderRank: string;
-    }>;
-    players: Array<{
-        _type: 'videoPlayer';
-        _id: string;
-        title: string;
-    }> | null;
-    gallery: Array<SanityImageSource>;
-    links: Array<{
-        _type: 'externalLink';
-        _id: string | null;
-        url: string;
-    }>;
-    tagline?: string;
-    overview: {
-        _type: 'rte';
-        rte: Array<any>;
-    };
-    orderRank?: string;
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-};
+    slug: Slug;
+    image: ImageAsset;
+    orderRank: string;
+}
+
+interface Type {
+    _id: string;
+    name: string;
+    slug: Slug;
+}
+
+interface Client {
+    _id: string;
+    name: string;
+    slug: Slug;
+}
+
+interface Category {
+    _id: string;
+    name: string;
+    slug: Slug;
+}
+
+export interface Player {
+    _key: string;
+    type: string;
+    name: string;
+    videoId: string;
+}
+export interface ProjectBySlug {
+    _id: string;
+    name: string;
+    tagline: string | null;
+    slug: Slug;
+    description: any[] | null;
+    types: Array<Type> | null;
+    tnails: Array<ImageAsset> | null;
+    client: Array<Client> | null;
+    gallery: Array<ImageAsset> | null;
+    links: Array<Link> | null;
+    skills: Array<Skill> | null;
+    // players: Array<{
+    //     _id: string;
+    //     name: string;
+    //     slug: Slug;
+    // }> | null;
+    categories: Array<Category> | null;
+    vidTnail: ImageAsset | null;
+    players: Array<Player> | null;
+}
+
+
+
+export interface ProjectsList {
+    _id: string;
+    name: string;
+    slug: Slug;
+    tnails: Array<ImageAsset> | null;
+    tagline: string | null;
+}

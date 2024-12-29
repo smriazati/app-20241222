@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Manrope } from 'next/font/google';
 import { SiteHeader } from "@/components/Site/Header";
 import '../globals.css'
+import { SiteFooter } from '@/components/Site/Footer';
 
 const manrope = Manrope({
     subsets: ["latin"],
@@ -29,8 +30,13 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${manrope.variable} transition-container ${isTransitioning ? "transitioning" : ""}`}>
-                <SiteHeader />
-                {children}
+                <div className="min-h-screen flex flex-col justify-between">
+                    <SiteHeader />
+                    <div className="grow">
+                        {children}
+                    </div>
+                    <SiteFooter />
+                </div>
             </body>
         </html>
     );
