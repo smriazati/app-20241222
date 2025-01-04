@@ -1,12 +1,14 @@
 import Link from "next/link";
+import { Logo } from "./Logo";
 
 
 export const SiteHeader = () => {
     return (
         <div className="p-4 fixed z-[999] w-full top-0 bg-cream">
-            <div className="flex justify-between">
+            <div className="flex  items-end justify-between">
                 <Link href="/">
-                    <h1 className="uppercase">sarah riazati</h1>
+                    <h1 className="sr-only">Sarah Riazati portfolio</h1>
+                    <Logo />
                 </Link>
 
                 <nav>

@@ -1,7 +1,7 @@
-import { client } from "@/sanity/lib/client";
+import { client, sanityFetch } from "@/sanity/lib/client";
 import { PROJECT_BY_SLUG_QUERY, PROJECT_METADATA_BY_SLUG_QUERY, PROJECTS_QUERY } from "@/sanity/lib/queries";
 import { NotFound } from "@/components/NotFound";
-import { groq, PortableText } from "next-sanity";
+import { PortableText } from "next-sanity";
 import { ProjectBySlug, ProjectListItemType, ProjectMetadataBySlug, Slug } from "@/types/types";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/images";
@@ -36,7 +36,12 @@ export async function generateMetadata(
 }
 
 const fetchProjectsByRank = async () => {
-  const projects = await client.fetch(PROJECTS_QUERY);
+
+  const projects = await sanityFetch({
+    query: PROJECTS_QUERY,
+    revalidate: 3600,
+  })
+
   return projects;
 };
 
@@ -70,8 +75,14 @@ const getRelatedProjects = async (currentSlug: Slug['current']): Promise<Project
 
 export default async function ProjectPage({ params }: Props) {
   const slug = (await params).slug
-  const project: ProjectBySlug = await client.fetch(PROJECT_BY_SLUG_QUERY, { slug });
   const relatedProjects: ProjectListItemType[] = await getRelatedProjects(slug)
+
+  const project = await sanityFetch({
+    query: PROJECT_BY_SLUG_QUERY,
+    params: { slug },
+    revalidate: 3600,
+  })
+
 
   if (!project) {
     return <NotFound />;
@@ -112,7 +123,7 @@ function ProjectHeader({ project }: { project: ProjectBySlug }) {
 }
 
 function ProjectDetails({ project }: { project: ProjectBySlug }) {
-  const { description, skills, links } = project;
+  const { description, projectRoles, skills, links } = project;
   return (
     <div className="flex flex-col gap-4">
 
@@ -120,6 +131,12 @@ function ProjectDetails({ project }: { project: ProjectBySlug }) {
         <div className="flex flex-col gap-1">
           <h3 className="uppercase">About</h3>
           <PortableText value={description} components={PortableTextComponents} />
+        </div>
+      )}
+      {projectRoles && (
+        <div className="flex flex-col gap-1">
+          <h3 className="uppercase">About</h3>
+          <PortableText value={projectRoles} components={PortableTextComponents} />
         </div>
       )}
       {links && links.length > 0 && (
@@ -188,5 +205,5 @@ function RelatedProjects({ relatedProjects }: { relatedProjects: ProjectListItem
       <h2 className="text-2xl font-bold">Related Projects</h2>
       <ProjectList projects={relatedProjects} priority={false} />
     </div>
-  );
+  )
 }

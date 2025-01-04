@@ -2,13 +2,16 @@
 import { ProjectListItem } from "./ProjectListItem";
 import { ProjectListItemType } from "@/types/types";
 
-export const ProjectList = ({ projects, priority = true }: { projects: ProjectListItemType[], priority?: boolean }) => {
+type ListTypes = 'grid' | 'list'
+
+export const ProjectList = ({ projects, priority = true, listType = 'grid' }: { projects: ProjectListItemType[], priority?: boolean, listType?: ListTypes }) => {
 
     if (!projects) {
         return null
     }
+
     return (
-        <ul className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6">
+        <ul className={`${listType === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4' : 'flex flex-col gap-4'}`}>
             {projects.map((project, index) => (
                 <li key={project._id}>
                     <ProjectListItem project={project} priority={priority} />

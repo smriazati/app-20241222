@@ -1,7 +1,7 @@
 import { Container } from "@/components/Layout/Container";
 import { ProjectList } from "@/components/ProjectList";
 import { ProjectNav } from "@/components/ProjectNav";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { PROJECTS_QUERY } from "@/sanity/lib/queries";
 import { Metadata } from "next";
 
@@ -12,7 +12,10 @@ export const metadata: Metadata = {
 
 export default async function Index() {
 
-  const projects = await client.fetch(PROJECTS_QUERY);
+  const projects = await sanityFetch({
+    query: PROJECTS_QUERY,
+    revalidate: 3600,
+  })
 
   return (
     <>
@@ -22,6 +25,6 @@ export default async function Index() {
         <ProjectList projects={projects} />
       </Container>
     </>
-  );
+  )
 }
 

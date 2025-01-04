@@ -1,10 +1,9 @@
 import { Container } from "@/components/Layout/Container";
 import { ProjectList } from "@/components/ProjectList";
 import { ProjectNav } from "@/components/ProjectNav";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { PROJECTS_BY_CATEGORY_QUERY } from "@/sanity/lib/queries";
 import { Metadata } from "next";
-import Head from "next/head";
 
 export const metadata: Metadata = {
     title: 'Video Projects | Sarah Riazati Portfolio',
@@ -13,7 +12,11 @@ export const metadata: Metadata = {
 
 
 export default async function VideoIndex() {
-    const projects = await client.fetch(PROJECTS_BY_CATEGORY_QUERY, { category: 'video' });
+    const projects = await sanityFetch({
+        query: PROJECTS_BY_CATEGORY_QUERY,
+        params: { category: 'video' },
+        revalidate: 3600,
+    })
 
 
     return (
@@ -23,6 +26,6 @@ export default async function VideoIndex() {
                 <ProjectList projects={projects} />
             </Container>
         </>
-    );
+    )
 }
 

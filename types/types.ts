@@ -54,6 +54,7 @@ export interface ProjectBySlug {
     tagline: string | null;
     slug: Slug;
     description: any[] | null;
+    projectRoles: any[] | null;
     types: Array<Type> | null;
     tnails: Array<ImageAsset> | null;
     client: Array<Client> | null;

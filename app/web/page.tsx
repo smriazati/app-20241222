@@ -1,7 +1,7 @@
 import { Container } from "@/components/Layout/Container";
 import { ProjectList } from "@/components/ProjectList";
 import { ProjectNav } from "@/components/ProjectNav";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { PROJECTS_BY_CATEGORY_QUERY } from "@/sanity/lib/queries";
 import { Metadata } from "next";
 
@@ -12,14 +12,19 @@ export const metadata: Metadata = {
 }
 
 export default async function WebIndex() {
-    const projects = await client.fetch(PROJECTS_BY_CATEGORY_QUERY, { category: 'web' });
+    const projects = await sanityFetch({
+        query: PROJECTS_BY_CATEGORY_QUERY,
+        params: { category: 'web' },
+        revalidate: 3600,
+    })
+
     return (
         <>
             <Container >
                 <ProjectNav active="web" />
-                <ProjectList projects={projects} />
+                <ProjectList projects={projects} listType="list" />
             </Container>
         </>
-    );
+    )
 }
 

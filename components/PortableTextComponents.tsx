@@ -72,8 +72,8 @@ export const PortableTextComponents: Partial<PortableTextReactComponents> = {
         normal: ({ children }: PortableTextComponentProps<any>) => <p className="text-[18px] leading-8 my-2">{children}</p>,
     },
     list: {
-        bullet: ({ children }: PortableTextComponentProps<any>) => <ul className="list-disc ml-6">{children}</ul>,
-        number: ({ children }: PortableTextComponentProps<any>) => <ol className="list-decimal ml-6">{children}</ol>,
+        bullet: ({ children }: PortableTextComponentProps<any>) => <ul className="list-disc ml-6 text-[18px] leading-8">{children}</ul>,
+        number: ({ children }: PortableTextComponentProps<any>) => <ol className="list-decimal ml-6 text-[18px] leading-8">{children}</ol>,
     },
     listItem: {
         bullet: ({ children }: PortableTextComponentProps<any>) => <li className="mb-1">{children}</li>,

@@ -18,6 +18,7 @@ const galleryProjection = `gallery[]{${imageAssetProjection}}`;
 const linksProjection = `links[]{ url, text }`;
 
 const descriptionProjection = `"description": overview.rte `;
+const projectRolesProjection = `"projectRoles": roleDescription.rte`;
 
 const vidTnailProjection = `vidTnail{ ${imageAssetProjection} }`;
 
@@ -58,7 +59,8 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`
         ${skillsProjection},
         ${categoriesProjection},
         ${vidTnailProjection},
-        ${playersProjection}
+        ${playersProjection},
+        ${projectRolesProjection}
     }
 `);
 
