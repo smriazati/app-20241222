@@ -23,7 +23,7 @@ export default async function WebIndex() {
             <Container >
                 <ProjectNav active="web" />
                 <ProjectList projects={projects} listType="list" />
-            </Container>
+            </Container >
         </>
     )
 }

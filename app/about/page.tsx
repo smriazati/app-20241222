@@ -24,7 +24,7 @@ export default function AboutPage() {
                         </div>
                     </div>
                     <div className="max-w-[80ch] mr-auto">
-                        <p>Sarah Riazati is a versatile front-end developer and UX/UI design expert with a strong background in creative arts and narrative production. Sarah specializes in creating polished, high-quality user experiences that seamlessly blend functionality with exceptional design. </p>
+                        <p>Sarah Riazati is a versatile front-end developer and UX/UI designer with a strong background in creative arts and narrative production. Sarah specializes in creating polished, high-quality user experiences that seamlessly blend functionality with exceptional design. </p>
 
                         <p>Sarah has spent her career at the crossroads of creativity and technology, consistently finding innovative ways to bridge the two. She is a self-taught developer with a passion for visual design, user experience and storytelling.</p>
 

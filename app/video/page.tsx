@@ -21,10 +21,10 @@ export default async function VideoIndex() {
 
     return (
         <>
-            <Container >
+            <Container>
                 <ProjectNav active="video" />
                 <ProjectList projects={projects} />
-            </Container>
+            </Container >
         </>
     )
 }

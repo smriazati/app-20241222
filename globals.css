@@ -124,3 +124,12 @@ h3 {
 p+p {
   margin-top: 1rem;
 }
+
+body {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: #000;
+  color: #fff;
+}

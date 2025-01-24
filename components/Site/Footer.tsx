@@ -18,7 +18,7 @@ const LINKS = [
 
 export const SiteFooter = () => {
     return (
-        <div className="py-8 px-4 shadow-sm bg-cream">
+        <div className="pt-2 pb-8 px-4 shadow-sm bg-cream">
             <div className="flex flex-col-reverse items-end gap-4 justify-end">
 
                 <p className="text-[10px] text-right">All Rights Reserved. {new Date().getFullYear()}</p>

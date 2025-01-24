@@ -9,7 +9,7 @@ interface Category {
 export const ProjectNav = ({ active }: { active: string }) => {
     // Define categories with both slug and label properties
     const categories: Category[] = [
-        { slug: 'all', label: 'All' },
+        { slug: 'all', label: 'All Projects' },
         { slug: 'web', label: 'Web' },
         { slug: 'video', label: 'Video' },
     ];

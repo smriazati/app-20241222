@@ -1,3 +1,4 @@
+import { Bio } from "@/components/Bio";
 import { Container } from "@/components/Layout/Container";
 import { ProjectList } from "@/components/ProjectList";
 import { ProjectNav } from "@/components/ProjectNav";
@@ -17,14 +18,19 @@ export default async function Index() {
     revalidate: 3600,
   })
 
+
   return (
     <>
 
-      <Container>
-        <ProjectNav active="all" />
-        <ProjectList projects={projects} />
-      </Container>
+      <div className="flex flex gap-4 flex-wrap pt-[46px]">
+        <div className="max-w-[50ch] bg-white p-4">
+          <Bio />
+        </div>
+        <div id="projects" className="max-w-[250px] p-4 w-full flex flex-col gap-8">
+          <ProjectList projects={projects} listType="list" />
+        </div>
+      </div>
+      {/* </Container> */}
     </>
   )
 }
-

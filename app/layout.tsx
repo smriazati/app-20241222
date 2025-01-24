@@ -1,5 +1,4 @@
 'use client'
-import { useEffect, useState } from 'react';
 import { Manrope } from 'next/font/google';
 import { SiteHeader } from "@/components/Site/Header";
 import '../globals.css'
@@ -17,25 +16,17 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const [isTransitioning, setIsTransitioning] = useState(false);
 
-    useEffect(() => {
-        const handleStart = () => setIsTransitioning(true);
-        const handleComplete = () => setIsTransitioning(false);
-        return () => {
-            // Clean up event listeners here if necessary
-        };
-    }, []);
 
     return (
         <html lang="en">
-            <body className={`${manrope.variable} transition-container ${isTransitioning ? "transitioning" : ""}`}>
-                <div className="min-h-screen flex flex-col justify-between">
+            <body className={`${manrope.variable} transition-container}`}>
+                <div className="min-h-screen flex flex-col justify-between bg-cream text-black">
                     <SiteHeader />
                     <div className="grow">
                         {children}
                     </div>
-                    <SiteFooter />
+                    {/* <SiteFooter /> */}
                 </div>
             </body>
         </html>
