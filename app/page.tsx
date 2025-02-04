@@ -21,14 +21,14 @@ export default async function Index() {
   return (
     <>
 
-      <div className="flex flex gap-4 flex-wrap pt-[46px]">
-        <div className="w-1/2 bg-white p-4">
-          <div className="min-w-[300px] max-w-[50ch] bg-white p-4 mx-auto">
+      <div className="flex flex flex-wrap pt-[46px]">
+        <div className="w-1/2 bg-white">
+          <div className="min-w-[300px] max-w-[50ch] bg-white p-8 mx-auto">
             <Bio />
           </div>
         </div>
-        <div id="projects" className="max-w-[250px] p-4 w-full flex flex-col gap-8">
-          <h2 className="text-lg italic">Projects coming soon</h2>
+        <div id="projects" className="w-1/2 w-full flex flex-col items-center gap-8">
+          <h2 className="text-lg whitespace-nowrap p-8 flex items-center gap-1">✨✨✨ <span className="text-xs">Projects coming soon</span> ✨✨✨</h2>
           {/* <ProjectList projects={projects} listType="list" /> */}
         </div>
       </div>
