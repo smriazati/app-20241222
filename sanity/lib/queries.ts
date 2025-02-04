@@ -24,6 +24,8 @@ const vidTnailProjection = `vidTnail{ ${imageAssetProjection} }`;
 
 const playersProjection = `players[]{ _key, type, name, videoId }`;
 
+const projectTemplateProjection = `template`
+const mainWebLinkProjection = `mainWebLink`
 export const projectsListBaseProjection = ` 
     _id,
     name,
@@ -60,7 +62,9 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`
         ${categoriesProjection},
         ${vidTnailProjection},
         ${playersProjection},
-        ${projectRolesProjection}
+        ${projectRolesProjection},
+        ${projectTemplateProjection},
+        ${mainWebLinkProjection}
     }
 `);
 
@@ -81,3 +85,14 @@ export const PROJECT_METADATA_BY_SLUG_QUERY = defineQuery(`
         }
     }
 `);
+
+
+
+export const SKILLS_QUERY = defineQuery(`
+    *[_type == "skill"]|order(name asc){
+        name, _id, 
+        ${slugProjection},
+        "image": image.asset-> { _id, url }
+    }
+`);
+

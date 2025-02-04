@@ -13,24 +13,27 @@ export const metadata: Metadata = {
 
 export default async function Index() {
 
-  const projects = await sanityFetch({
-    query: PROJECTS_QUERY,
-    revalidate: 3600,
-  })
-
+  // const projects = await sanityFetch({
+  //   query: PROJECTS_QUERY,
+  //   revalidate: 3600,
+  // })
 
   return (
     <>
 
       <div className="flex flex gap-4 flex-wrap pt-[46px]">
-        <div className="max-w-[50ch] bg-white p-4">
-          <Bio />
+        <div className="w-1/2 bg-white p-4">
+          <div className="min-w-[300px] max-w-[50ch] bg-white p-4 mx-auto">
+            <Bio />
+          </div>
         </div>
         <div id="projects" className="max-w-[250px] p-4 w-full flex flex-col gap-8">
-          <ProjectList projects={projects} listType="list" />
+          <h2 className="text-lg italic">Projects coming soon</h2>
+          {/* <ProjectList projects={projects} listType="list" /> */}
         </div>
       </div>
       {/* </Container> */}
     </>
   )
 }
+

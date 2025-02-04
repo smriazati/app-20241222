@@ -26,7 +26,7 @@ export const Logo = () => {
         >
             {/* S */}
             <text
-                x="0"
+                x={isHovered ? 0 : viewBoxWidth / 2 - 30}
                 y="38"
                 className="fill-black font-bold text-4xl"
                 style={{
@@ -38,7 +38,7 @@ export const Logo = () => {
 
             {/* R */}
             <text
-                x={isHovered ? R_SLIDE_DISTANCE : R_INITIAL_DISTANCE}
+                x={isHovered ? R_SLIDE_DISTANCE : viewBoxWidth / 2 + 10}
                 y="38"
                 className="fill-black font-bold text-4xl"
                 style={{

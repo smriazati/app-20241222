@@ -69,7 +69,7 @@ export const PortableTextComponents: Partial<PortableTextReactComponents> = {
         h1: ({ children }: PortableTextComponentProps<any>) => <h1 className="text-4xl font-bold my-4">{children}</h1>,
         h2: ({ children }: PortableTextComponentProps<any>) => <h2 className="text-3xl font-semibold my-3">{children}</h2>,
         h3: ({ children }: PortableTextComponentProps<any>) => <h3 className="text-2xl font-medium my-2">{children}</h3>,
-        normal: ({ children }: PortableTextComponentProps<any>) => <p className="text-[18px] leading-8 my-2">{children}</p>,
+        normal: ({ children }: PortableTextComponentProps<any>) => <p className="text-[18px] leading-8 my-2 text-justify hyphens-auto" style={{ hyphenateLimitChars: '6 3 2' }}>{children}</p>,
     },
     list: {
         bullet: ({ children }: PortableTextComponentProps<any>) => <ul className="list-disc ml-6 text-[18px] leading-8">{children}</ul>,

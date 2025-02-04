@@ -7,7 +7,7 @@ export
                 <div>
                     <div className="flex gap-4">
                         <div className="overflow-hidden w-[200px] h-auto bio-image">
-                            <Image src="/bio.jpeg" alt="Sarah Riazati" width={200} height={100} className="object-cover w-full h-full" />
+                            <Image src="/collage.jpg" alt="Sarah Riazati" width={200} height={100} className="object-cover w-full h-full" />
                         </div>
                         <div className="overflow-hidden w-[200px] h-auto bio-image">
                             <Image src="/bolex.jpg" alt="Sarah Riazati" width={200} height={100} className="object-cover w-full h-full" />
@@ -15,9 +15,9 @@ export
                         <div className="overflow-hidden w-[200px] h-auto bio-image">
                             <Image src="/film.jpg" alt="Sarah Riazati" width={200} height={100} className="object-cover w-full h-full" />
                         </div>
-                        <div className="overflow-hidden w-[200px] h-auto bio-image">
-                            <Image src="/collage.jpg" alt="Sarah Riazati" width={200} height={100} className="object-cover w-full h-full" />
-                        </div>
+                        {/* <div className="overflow-hidden w-[200px] h-auto bio-image">
+                            <Image src="/bio.jpg" alt="Sarah Riazati" width={200} height={100} className="object-cover w-full h-full" />
+                        </div> */}
                     </div>
                 </div>
                 <div>
@@ -30,16 +30,9 @@ export
                     <p>
                         My nontraditional path—from documentary filmmaker to college lecturer to freelance developer—has made me a curious, adaptable problem solver who thrives in fast-paced environments. Years of freelancing makes me a collaborative problem solver and strategic thinker who brings clarity and structure to complex challenges.
                     </p>
-                    <h3 className="mt-6 mb-2 font-bold">Core Expertise</h3>
-                    <ul className="list-disc pl-4">
-                        <li>Front-End Development (React, Next.js, Vue, TypeScript, Tailwind, Sass)</li>
-                        <li>Scalable Design Systems & Workflow Optimization</li>
-                        <li>Headless CMS & Migrations (Sanity)</li>
-                        <li>UX/UI Design & Product Storytelling (Figma, Animation, Video Production)</li>
-                        <li>Agile Development & Cross-Team Collaboration</li>
-                        <li>Strategic Thinking & Creative Problem Solving</li>
-                    </ul>
+
                 </div>
+                <Skills />
                 <Footer />
             </div>
         )
@@ -49,6 +42,7 @@ export
 
 import Link from "next/link";
 import { GithubSvg, LinkedinSvg } from "./Icons";
+import { Skills } from "./SkillsList";
 
 
 const LINKS = [

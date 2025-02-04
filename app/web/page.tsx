@@ -1,4 +1,5 @@
 import { Container } from "@/components/Layout/Container";
+import { NotFound } from "@/components/NotFound";
 import { ProjectList } from "@/components/ProjectList";
 import { ProjectNav } from "@/components/ProjectNav";
 import { sanityFetch } from "@/sanity/lib/client";
@@ -18,6 +19,7 @@ export default async function WebIndex() {
         revalidate: 3600,
     })
 
+    return (NotFound())
     return (
         <>
             <Container >

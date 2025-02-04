@@ -16,12 +16,20 @@ interface Link {
     text: string;
 }
 
-interface Skill {
-    _id: string;
+// interface Skill {
+//     _id: string;
+//     name: string;
+//     slug: Slug;
+//     image: ImageAsset;
+//     orderRank: string;
+// }
+
+
+export interface Skill {
     name: string;
+    _id: string;
     slug: Slug;
-    image: ImageAsset;
-    orderRank: string;
+    image: ImageAsset
 }
 
 interface Type {
@@ -69,8 +77,9 @@ export interface ProjectBySlug {
     categories: Array<Category> | null;
     vidTnail: ImageAsset | null;
     players: Array<Player> | null;
+    template: string
+    mainWebLink: string
 }
-
 
 
 export interface ProjectListItemType {
@@ -88,3 +97,4 @@ export interface ProjectMetadataBySlug {
     ogImg: ImageAsset | null;
 
 }
+
