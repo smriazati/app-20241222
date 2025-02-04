@@ -27,7 +27,7 @@ export default async function Index() {
             <Bio />
           </div>
         </div>
-        <div id="projects" className="w-1/2 w-full flex flex-col items-center gap-8">
+        <div id="projects" className="w-1/2 flex flex-col items-center gap-8">
           <h2 className="text-lg whitespace-nowrap p-8 flex items-center gap-1">✨✨✨ <span className="text-xs">Projects coming soon</span> ✨✨✨</h2>
           {/* <ProjectList projects={projects} listType="list" /> */}
         </div>
